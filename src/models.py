@@ -2,16 +2,12 @@ from __future__ import annotations
 
 import time
 from http import HTTPStatus
-from typing import Any, List
+from typing import Any
 
 from pydantic import BaseModel, Field
 from pydantic.alias_generators import to_camel
 
 from src import consts
-
-class Cookie(BaseModel):
-    name: str
-    value: str
 
 class LinkRequest(BaseModel):
     cmd: str = Field(
@@ -19,7 +15,7 @@ class LinkRequest(BaseModel):
         description="Type of request, currently only supports GET requests. This string is purely for compatibility with FlareSolverr.",
     )
     url: str = Field(pattern=r"^https?://", default="https://")
-    cookies: List[Cookie] = Field(default=[])
+    cookies: list[dict] = Field(default=[])
     max_timeout: int = Field(default=60)
 
 

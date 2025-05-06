@@ -49,6 +49,7 @@ def health_check(sb: SeleniumDep):
 def read_item(request: LinkRequest, sb: SeleniumDep) -> LinkResponse:
     """Handle POST requests."""
     start_time = int(time.time() * 1000)
+    sb.add_cookies(request.cookies)
     sb.uc_open_with_reconnect(request.url)
     logger.debug(f"Got webpage: {request.url}")
     source_bs = sb.get_beautiful_soup()

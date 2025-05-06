@@ -19,7 +19,7 @@ class LinkRequest(BaseModel):
         description="Type of request, currently only supports GET requests. This string is purely for compatibility with FlareSolverr.",
     )
     url: str = Field(pattern=r"^https?://", default="https://")
-    cookies: List[Cookie]
+    cookies: List[Cookie] = Field(default=[])
     max_timeout: int = Field(default=60)
 
 

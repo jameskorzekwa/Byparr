@@ -50,8 +50,8 @@ def read_item(request: LinkRequest, sb: SeleniumDep) -> LinkResponse:
     """Handle POST requests."""
     start_time = int(time.time() * 1000)
     logger.info(f'cookies: {request.cookies}')
-    sb.add_cookies(request.cookies)
     sb.uc_open_with_reconnect(request.url)
+    sb.add_cookies(request.cookies)
     logger.debug(f"Got webpage: {request.url}")
     source_bs = sb.get_beautiful_soup()
     title_tag = source_bs.title

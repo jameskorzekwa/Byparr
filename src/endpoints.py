@@ -55,6 +55,8 @@ def read_item(request: LinkRequest, sb: SeleniumDep) -> LinkResponse:
     sb.execute_cdp_cmd("Network.enable", {})
     sb.execute_cdp_cmd("Network.setExtraHTTPHeaders", {"headers": {"Cookie": cookieHeader}})
     sb.uc_open_with_reconnect(request.url)
+    sb.delete_all_cookies()
+    sb.add_cookies(request.cookies)
     logger.debug(f"Got webpage: {request.url}")
     source_bs = sb.get_beautiful_soup()
     title_tag = source_bs.title

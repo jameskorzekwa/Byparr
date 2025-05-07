@@ -50,7 +50,7 @@ def read_item(request: LinkRequest, sb: SeleniumDep) -> LinkResponse:
     """Handle POST requests."""
     start_time = int(time.time() * 1000)
     logger.info(f'cookies: {request.cookies}')
-    cookieHeader = [f'{x['name']}={x['value']}' for x in request.cookies].join('; ')
+    cookieHeader = '; '.join([f'{x['name']}={x['value']}' for x in request.cookies])
     logger.info(f'cookieHeader: {cookieHeader}')
     sb.driver.request_interceptor = lambda req: req.headers.update({'Cookie': cookieHeader})
     sb.uc_open_with_reconnect(request.url)
